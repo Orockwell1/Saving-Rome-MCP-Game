@@ -137,6 +137,27 @@ Demonstrate both “build an ocean-going navy” and “reform religion” gener
 
 At least one previously unauthored goal must produce valid new nodes on screen, use campaign-specific prerequisites, and have initial steps that can be executed, advanced through time, and resumed from the save. Include a rejected or unsupported definition case to prove that generation cannot bypass the engine.
 
+## Private design source and runtime visual generation
+
+The creator's Figma workspace remains private. Runtime players and their AI assistants require no Figma account, plugin connection, file key, or source-file access. Deliberately export and release only the reusable assets, tokens, and components intended for the open-source game. Public exported assets are distributable under their declared license; keeping the Figma source private does not make bundled artwork secret. Remove private file links from public handoff documents.
+
+Publish a versioned component/asset catalog with semantic IDs, descriptions, tags, allowed variants, icon composition slots, dimensions, and fallbacks. Optional approved preview sheets can help a vision-capable assistant understand the style, but the runtime should work from structured descriptions without image access. Expose compact catalog search/inspection through the game interface or MCP rather than sending every SVG on every turn.
+
+Support visual creation in layers:
+
+1. Select existing icons and components for new concepts. New content does not require new artwork.
+2. Compose approved primitives: for example, an assembly symbol plus a faith badge for a religious council. Enforce consistent palette, stroke, scale, and badge slots; keep gameplay status separate from semantic artwork.
+3. Add constrained procedural motifs/textures from validated parameters or seeds when useful. Do not require arbitrary model-written shaders or UI code.
+4. Optionally create original artwork through an explicitly available generation tool/service or local model, using approved style references. Do not assume a generic MCP connection grants image-generation capability or that an AI subscription includes an API. Budget/capability checks, fallback visuals, validation, and asset persistence are required. This is optional after the first pass.
+
+The model chooses structured component descriptions and icon recipes; trusted code validates and renders them. Previously unauthored trees use existing UI primitives. Truly new component behavior requires implementation and registration. Novel artwork is not a substitute for executable simulation rules.
+
+Store generated asset bytes or deterministic recipes locally with stable IDs, provenance, version/hash, and licensing notes. Do not regenerate accepted assets every conversation or rely on temporary chat-image URLs. Treat imported/generated SVG as untrusted input: prefer an allowlisted declarative shape recipe, or sanitize/rasterize SVG; disallow scripts, event handlers, external references, and arbitrary embedded HTML. Unknown IDs or failed generation must yield a labeled fallback without blocking play.
+
+First-pass proof: render a new religious reform tree without Figma access, select/combine public catalog primitives into a suitable symbol, preserve it across restart, and display a fallback for an unknown symbol. No image-generation service is required.
+
+Precedents to evaluate, not adopted dependencies: [A2UI](https://github.com/a2ui-project/a2ui) and [json-render](https://github.com/vercel-labs/json-render) for catalog-based generative UI; [Lucide](https://lucide.dev/guide/react) for reusable SVG icons. Verify licenses, versions, and embedded-client compatibility before reuse. These frameworks do not themselves supply ChatGPT integration or game rules.
+
 ## Clock and pacing
 
 The player wants a world that moves while talking, but liked the immediate satisfaction of saying what they want and seeing progress.

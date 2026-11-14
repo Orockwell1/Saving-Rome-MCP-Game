@@ -5,3 +5,5 @@ No third-party game assets or geographic datasets are included yet. The reposito
 For every imported dataset, font, icon, image, or copied code example, record source URL, author, license/version, required attribution, modifications, and local paths. Do not copy map tiles, historical atlases, proprietary game art, or Figma community assets without compatible rights.
 
 Natural Earth is a candidate public-domain physical geography baseline. Ancient borders and settlements need separate research and uncertainty notes. Review Figma assets before export/publication.
+
+The Figma source is private. Release only approved exports and tokens; players do not connect to Figma. Publish an asset catalog with descriptions and composition rules, and persist generated recipes/artwork. See the first-pass brief for runtime generation boundaries.

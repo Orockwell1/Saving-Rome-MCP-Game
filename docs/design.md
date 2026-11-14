@@ -1,8 +1,8 @@
 # Figma handoff
 
-Player-provided source: [Rome Game — Tech Tree Icons, node 9:1006](https://www.figma.com/design/oDlwJeCthWHYbSGXVfLVPa/Rome-Game-%E2%80%94-Tech-Tree-Icons?node-id=9-1006).
+Design source: private creator-owned Figma file. Runtime players and AI clients do not need file access; the public project uses deliberately released assets, components, and design tokens only.
 
-Status: link recorded; file contents have not yet been inspected or exported. This link does not imply public access or permission to redistribute third-party assets.
+Status: source contents have not been inspected or exported in this workspace. Confirm redistribution rights for each exported asset. The source Figma link is intentionally omitted from current public documentation.
 
 ## Prepare for implementation
 
