@@ -14,3 +14,5 @@ Status: link recorded; file contents have not yet been inspected or exported. Th
 - Compose a representative tree, selected-tech details panel, and map selection panel. Validate inside the real embedded viewport before expanding the library.
 
 Visual target: readable historical atlas, muted political colors, deep blue seas, restrained animation; no map terrain or provinces need to be hand-drawn in Figma.
+
+See [motion design evaluation](motion-design.md) for shared timing tokens, generated-tree behavior, accessibility, and implementation checks.

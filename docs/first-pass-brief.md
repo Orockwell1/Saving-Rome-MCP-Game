@@ -23,7 +23,8 @@ The engine owns the facts and resolves outcomes. The model explains, plans, narr
 - **Persistence:** retain routes, schedules, projects, inventories, standing orders, decisions, and chronicle across service restarts and fresh chats.
 - **Shared commands:** clicking a fleet and ordering it through chat affect the same unit through the same rules.
 - **Living world:** campaign time can progress while the player talks, with pause, speed controls, and fast-forward.
-- **Map and tech tree are functional interfaces**, not decorative illustrations.
+- **Map and development tree are functional interfaces**, not decorative illustrations.
+- **Generate new playable content during the campaign** from player ambitions, using reusable UI components and validated simulation primitives; do not restrict play to fixed authored goals.
 
 ## Verify the ChatGPT connection first
 
@@ -103,6 +104,39 @@ Research the precise ship design and requirements; label assumptions. Do not mak
 
 Industrial steel is a later branch. Eventual ambitions include coal/coke/steel, steam, railways, firearms, artillery, airships, and steel fleets.
 
+## Core requirement: create new playable content during play
+
+The game must grow around player-defined ambitions, rather than limit play to prewritten goals or a fixed technology catalog. A player can say “I want to reform religion,” describe a reform not previously authored, and have ChatGPT generate a new development tree during that campaign. The orange expedition is an optional example of this process, not a uniquely scripted exception.
+
+### Reusable visual foundations
+
+Figma defines the visual language and reusable components, not every possible screen or project. Build a consistent kit of map markers, territory highlights, routes, development nodes, dependency links, status indicators, detail panels, decisions, and dispatches. Include broad reusable icons for faith, law, assembly, learning, construction, diplomacy, resources, and transport, with text labels and a generic fallback.
+
+ChatGPT supplies structured content that the UI renders using these components. New goals, branches, projects, and map annotations appear in the established style without generating arbitrary executable UI code or redesigning the interface. Existing component behavior and accessibility remain consistent.
+
+Generalize the visible technology tree into a **development tree** that can represent inventions, institutions, policies, reforms, and expeditions. The naval technology branch remains one use of it.
+
+### Generation and execution flow
+
+1. The player states an ambition in their own words; ask a focused question when its intended meaning materially changes the plan.
+2. The steward reads current campaign facts and generates a proposed development tree, including new named projects or institutions where appropriate.
+3. Each proposed node has stable identifiers, prerequisites, scope, costs, duration, affected people/places, and supported rules for outcomes and consequences.
+4. The engine validates the structured definitions against its schema and supported mechanics. The UI displays the proposal using the reusable design kit, showing resource requirements and affected map locations.
+5. Player acceptance or an existing scoped mandate authorizes commitment. Persist accepted definitions and their provenance/version, not just the model’s prose. Regenerating a proposal must not silently replace committed work or completed history.
+6. Projects then run through the same time, resources, events, and command systems as authored content. Progress, opposition, complications, and decisions update the tree and map.
+
+### Reusable simulation foundations
+
+Provide extensible primitives for projects and dependencies, resources/workforce, laws and institutions, support/opposition/legitimacy, and events/decisions. Assemble novel content from these mechanics rather than hard-code every ambition. Implement a small meaningful subset first.
+
+Generation is not permission to invent successful outcomes. The model cannot award itself resources, bypass prerequisites, add arbitrary code, or create unsupported simulation behavior. If an ambition requires a genuinely new mechanic, explain the gap and offer an explicit supported approximation or mark the feature as requiring implementation. Distinguish proposed effects, committed rules, and actual results.
+
+### First-pass proof
+
+Demonstrate both “build an ocean-going navy” and “reform religion” generating different, persisted development trees through the same pipeline. Their specific trees must not be mandatory hard-coded scripts. A small seed catalog of capabilities, mechanics, and examples is acceptable.
+
+At least one previously unauthored goal must produce valid new nodes on screen, use campaign-specific prerequisites, and have initial steps that can be executed, advanced through time, and resumed from the save. Include a rejected or unsupported definition case to prove that generation cannot bypass the engine.
+
 ## Clock and pacing
 
 The player wants a world that moves while talking, but liked the immediate satisfaction of saying what they want and seeing progress.
@@ -176,7 +210,8 @@ Keep each increment playable. Complete historical geography, full combat, extens
 
 ## First-pass acceptance
 
-- Embedded map and visible naval tech tree work inside ChatGPT.
+- Embedded map and visible development tree work inside ChatGPT.
+- Previously unauthored naval and religious ambitions can generate different valid, saved project trees using the same rendering and validation pipeline; initial steps are executable and unsupported mechanics are identified honestly.
 - Both UI and chat orders use the same engine and save.
 - Fleet movement has a visible route and arrival estimate; time actually progresses.
 - Rerouting uses current position; the steward explains arrival changes from saved facts.
@@ -205,3 +240,7 @@ These are documented precedents, not personally tested or approved dependencies.
 ## Handoff instructions
 
 Treat this as the agreed baseline. Inspect any existing project and current official ChatGPT integration documentation first. Explain a compact architecture and initial vertical slice before broad implementation. Ask only materially blocking questions; make routine choices with stated, adjustable defaults. Do not reopen settled requirements such as ChatGPT-first play, local hosting, optional tutorial, or exclusion of the Americas.
+
+## Motion foundation
+
+Use Motion for React as the candidate single animation library, native CSS for simple states, and LottieFiles motion-design principles as selective design guidance. AI Kit is optional development tooling; no paid audits or external MCP service is needed to run animations. Keep effects restrained, interruptible, and independent of simulation outcomes. Generated tree updates must preserve selection, focus, and viewport. Graph/map renderers own their positioning and camera transforms; animate node interiors rather than competing wrappers. Respect reduced motion in both DOM effects and custom map/graph movement. Test large trees and actual ChatGPT embedding before claiming performance. See the repository’s docs/motion-design.md for tokens, behavior, sources, and acceptance checks.

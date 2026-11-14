@@ -30,3 +30,5 @@ There is no install or run command yet. The first milestone is one fleet moving 
 ## Open source and privacy
 
 Project-owned code and documentation are MIT licensed. Third-party code, maps, fonts, and art retain their own terms; see [asset provenance](docs/assets.md). Campaign saves, credentials, and local settings must not be committed. Public source does not require public campaign data.
+
+See [motion design evaluation](docs/motion-design.md) for shared timing tokens, generated-tree behavior, accessibility, and implementation checks.
