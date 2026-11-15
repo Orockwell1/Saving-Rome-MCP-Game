@@ -1,0 +1,95 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "provenance": "Creator-supplied ChatGPT-generated PNG exports; release authorized by creator. Inspiration and originality not independently verified.",
+  "assets": {
+    "blue-water-fleet": {
+      "file": "blue-water-fleet.png",
+      "sha256": "2568fd97a7b42bb961a65f0ec9c68d113dcefa3ac59b85f14ca5c2ade21ae840",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "crew-training": {
+      "file": "crew-training.png",
+      "sha256": "212768b08c5a803bbcedd836af8d1f10cd92ded81fca434fbc0bcf6063fdcca7",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "navigation-charts": {
+      "file": "navigation-charts.png",
+      "sha256": "6bb5d5c9fd88a80640f1fbdaf27887d940cd961726bd86315767ec678903595d",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "rigging": {
+      "file": "rigging.png",
+      "sha256": "4c96de334f39961be73d011bfebd37717a5066c61ff4b60bb1d677a5a6074dca",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "sail-plans": {
+      "file": "sail-plans.png",
+      "sha256": "269a93d8cf9f9368362fce4961490f448fabf906a5a8822eac84c3eff9630dc7",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "sailcloth": {
+      "file": "sailcloth.png",
+      "sha256": "daa76536dca1369c6adcf744cd675e893acbf65971b83add4e859402cbe714c2",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "sea-provisions": {
+      "file": "sea-provisions.png",
+      "sha256": "d96f2acf8c643fafd8f97f2acbacac128bf0e555d55b109323e7760284f81e1f",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "seasoned-timber": {
+      "file": "seasoned-timber.png",
+      "sha256": "7247379a47ee90d5c49fc2f4e68beeeccf2acf57797e5670ba5e7bf3334e604c",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "shipyards": {
+      "file": "shipyards.png",
+      "sha256": "0393778600a5c39959edfa8f00e9196a24c9b686f06165d63f3ffb45c1927edb",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "stronger-hulls": {
+      "file": "stronger-hulls.png",
+      "sha256": "7a2504096c9990e7b6cc99647f96f690f9bee2967731b263ef3b45b8e177719e",
+      "dimensions": [
+        362,
+        362
+      ]
+    },
+    "trial-vessel": {
+      "file": "trial-vessel.png",
+      "sha256": "3ae5a4e0e6a170829a69505c490ebd417e82ec67e714d2ae42e05357e8c3e83e",
+      "dimensions": [
+        362,
+        362
+      ]
+    }
+  }
+}
