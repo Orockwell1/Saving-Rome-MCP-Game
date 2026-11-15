@@ -2,9 +2,9 @@
 
 ## Current state
 
-The contract-based workflow below is adapted from Bandog's development tooling. **Exact Rome source inspection is blocked on local Figma credentials.** The current node/details UI is a working implementation baseline, not a verified Figma translation. No exact component bindings, approved design tokens, matching-viewport comparison, or visual sign-off have been produced.
+The workflow is adapted from Bandog's contract-based development tooling. Authenticated private references have now been inspected and mapped to one reusable development card and inspector. The original connector handoff was live, without an immutable version; the subsequent comparison used a verified version-pinned capture. Exact source identities and evidence remain outside Git.
 
-Implemented now: a private, version-pinned, read-only evidence capture command and its privacy-boundary tests. Public component contracts and the contract-driven node/panel revision must follow source inspection; they are not represented by invented mappings or a passing empty audit.
+Implemented: [the public contract](components/development-node-details.v1.json), presentation types, scoped tokens/styles, shared generated/authored-tree integration, a hermetic comparison lab, and real-host browser regressions. The selected pair is verified with declared differences, not pixel-identical or a sign-off of the full frame, map, or wider workspace.
 
 ## Public/private boundary
 
@@ -20,6 +20,8 @@ Never import private metadata into Vite or the production MCP resource. A public
 
 ## Capture the source
 
+A supplied local connector handoff needs no token to open. Preserve whether it is live or version-pinned; never relabel unversioned evidence as immutable. For an optional fresh REST capture:
+
 1. Generate a short-lived personal token with `file_content:read`, following [Figma's token instructions](https://developers.figma.com/docs/rest-api/personal-access-tokens/). Do not use a `VITE_` environment variable.
 2. Store `FIGMA_ACCESS_TOKEN` in the host environment or the repository's ignored `.env.local`, with owner-only permissions. Never paste it into a contract, command argument, issue, or screenshot.
 3. Keep `source.json` outside every Git checkout. Its `schemaVersion` is `1`; `fileKey` and the unique `nodeIds` come from the actual private selection, not an example or guessed ID.
@@ -31,6 +33,22 @@ Never import private metadata into Vite or the production MCP resource. A public
    ```
 
 The command records a shallow frame index, the selected node trees, and PNG renders at scale 1 using absolute bounds. Node JSON and images are pinned to the same Figma file version. Timestamped private capture directories preserve previous references; `capture.json` records dimensions and hashes and remains `unreviewed`. The tool does not publish assets, write to Figma, or approve a match. It refuses Git-contained metadata, credential redirects, unsupported image origins, missing nodes/renders, and unpinned versions.
+
+## Run the isolated component lab
+
+```sh
+npm run dev:design
+npm run build:design
+npm run test:design
+```
+
+The loopback-only lab runs at `http://127.0.0.1:5174` with no campaign proxy. It imports the real presentation components, not the campaign bridge. Public default data is independently authored fixture content, not a hidden copy of the reference campaign.
+
+Use the native file picker for private presentation-only reference JSON, validated by the strict schema in `tests/design-lab/contracts.ts`. Files stay in browser memory. Metadata and unknown fields are rejected; allowed strings render literally, never as markup, styles, executable controls or fetched URLs. No reference file becomes a Vite import, upload or storage entry. The loader limits files to 64 KiB; the schema bounds text, identifiers and requirement counts.
+
+Closed scenario IDs cover proposal, blocked, available, underway, complete, pending acknowledgement, errors, empty selection, unsupported rules, disconnected steward and long content. Delivery buttons explicitly simulate fixture acknowledgements; they never claim to run the engine or an AI. “Collect layout evidence” records only the bounded, named regions and computed geometry/styles—never source text, HTML or credentials.
+
+Production behavior is separate: `npm run build && npm run test:ui` exercises isolated real campaigns. The graph adapter opts its native buttons into pointer handling and out of drag/pan interception. Busy/unavailable selection is exposed with `aria-disabled` without dropping focus; compact restoration runs after the visible graph commits.
 
 ## First slice, before expansion
 
@@ -46,4 +64,20 @@ A passing report requires real source bindings, complete required-region/state c
 
 ## Verification so far
 
-`uv run pytest tests/test_design_capture.py -q`: 15 tests passed. These cover checkout/symlink exclusion, strict source identifiers, token-origin restrictions, redirect refusal, and private non-executed credential files. Live API capture was attempted and stopped because `FIGMA_ACCESS_TOKEN` was not configured. No authenticated Figma or visual-match result is claimed.
+The public contract and private binding cover five node states × four interactions, four inspector phases, reusable tokens, 21 semantic regions and seven closed behavior flows. Busy/error/empty/planned/disconnected/live-progress/long-content behavior is explicitly an operational extension, not an invented source variant.
+
+- Production TypeScript/build and the separate lab build passed. The production HTML was approximately 7.52 MB / 4.05 MB gzip.
+- All nine hermetic Playwright journeys passed across 1488×784, 396×784 and 390×844, including strict private-content import, no uploads, keyboard selection, acknowledgement/rejection, disconnected steward and long-content scrolling. Failed harness selectors/copy assertions were corrected; reruns were limited to affected journeys.
+- Four real-host journeys passed across desktop and mobile: generated-tree inspection/authorization/commissioning plus live reduced-motion behavior. The order test delays a genuine server response, not a fabricated snapshot. Selection spends nothing; commissioning debits the engine-defined cost once.
+- Native checks matched source background/border/focus styling for all 20 node combinations, and phase color/action counts for all four inspector phases.
+- Eleven measured reference boxes match exactly. The selected card is 210×137; the proposal inspector is 324×479. At DPR 1, the inspector is at (1137,185) in 1488×784, (36,153) in 396×784, and (33,153) in 390×844. Neither compact viewport has document horizontal overflow.
+- Source comparison fixed font coverage, platform-dependent symbols, excess text weight, the missing impact marker and a one-pixel panel-title baseline offset. Real-host checks fixed pointer activation and compact focus restoration.
+
+| Target | Initial pixels differing by >16/255 in any channel | After corrections |
+| --- | ---: | ---: |
+| Selected node | 7.657% | 3.775% |
+| Proposal inspector | 9.445% | 3.655% |
+
+These are raw difference counts, not similarity or approval scores. The node includes the creator-approved substitution of the existing public transport glyph; the supplied private ship vector is not published. Residual text-edge rasterization differences remain. Private reports retain full images, differences, measurements and source bindings; no claim of pixel identity is made.
+
+The existing 15 capture privacy tests cover checkout/symlink exclusion, strict identifiers, token-origin restrictions and redirect refusal. Actual authenticated ChatGPT embedding/CSP and Windows acceptance remain unverified. A local browser or fixture does not close those milestones.

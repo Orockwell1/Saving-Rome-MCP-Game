@@ -18,7 +18,9 @@ The schematic map was replaced with offline 1:50m geography, coast-clipped conte
 
 A separately authored twelve-node naval proposal was accepted, completed under a scoped mandate, and produced local manufacturing capacity, a trial vessel and a three-ship advanced squadron. A religious civic-reform proposal was imported through the UI; its consultation completed with a prerequisite referencing the naval branch. The SDK integration test separately exercises novel naval/religious proposals, policy choices, forged-definition rejection and persistence without a model API.
 
-**Priority gate:** inspect and translate one exact private Figma node/details pair using [public contracts and private evidence](design-translation-layer.md). The current component UI is not a Figma fidelity claim. Do not expand the family before documented differences are resolved.
+**First design gate completed:** one exact private node/details pair is implemented through [public contracts and private evidence](design-translation-layer.md). Matching-viewport comparisons cover the selected pair, 20 node interaction combinations and four inspector phases. The private ship vector is excluded by explicit choice; text-edge differences remain documented. This does not sign off the map or wider workspace.
+
+Real-host desktop/mobile journeys exercise novel generated nodes, pointer and keyboard selection, delayed acknowledgement, prerequisite gates, exact engine-cost debit, and compact Back/Escape focus/camera restoration. They exposed and fixed React Flow pointer interception, unavailable-selection semantics and premature focus restoration.
 
 ## M3 — Optional tutorial and executable logistics
 
@@ -34,7 +36,7 @@ The subsequent live reduced-motion fix passed production compilation and the rea
 
 ## Outstanding release evidence
 
-- Exact private-source component mapping, design-token/variant review and matching-viewport node/details comparison.
+- Wider-workspace and map design acceptance beyond the completed node/details contract.
 - Windows performance and native select-popup keyboard acceptance. In the Mac headless diagnostic, the same arrow/Enter sequence also failed to change a plain HTML select outside Rome.
 - Release acceptance; the candidate must not be presented as fully implemented.
 - Actual ChatGPT installation, embedded interaction and PC/Mac access to the same host.

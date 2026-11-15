@@ -6,5 +6,5 @@
     "allowImportingTsExtensions": true, "noEmit": true,
     "esModuleInterop": true, "types": ["vite/client", "node"]
   },
-  "include": ["ui/src", "vite.config.ts", "playwright.config.ts", "tests/ui/**/*.ts"]
+  "include": ["ui/src", "vite.config.ts", "vite.design.config.ts", "playwright.config.ts", "playwright.design.config.ts", "tests/ui/**/*.ts", "tests/design-lab"]
 }

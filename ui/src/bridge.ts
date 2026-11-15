@@ -71,6 +71,18 @@ export class Bridge {
     await this.connect();
     await this.app!.updateModelContext({ structuredContent: { selection, revision, instruction: 'Inspect current campaign facts before advising or issuing orders.' } });
   }
+  async discussNode(id: string, revision: number, isCurrent: () => boolean) {
+    if (!this.embedded) throw new ToolFailure('No connected steward is available in standalone preview.');
+    await this.connect();
+    if (!isCurrent()) throw new ToolFailure('Selection changed before the discussion could be sent.');
+    await this.app!.updateModelContext({ structuredContent: {
+      selection: { kind: 'node', id }, revision,
+      instruction: 'Discuss this existing development only. Inspect authoritative campaign facts and requirements first. This discussion grants no authority to issue orders, spend resources, accept ambitions, or create another development.',
+    } });
+    if (!isCurrent()) throw new ToolFailure('Selection changed before the discussion could be sent.');
+    const result = await this.app!.sendMessage({ role: 'user', content: [{ type: 'text', text: `Discuss the existing selected Rome development ${JSON.stringify(id)} at campaign revision ${revision}. Inspect the current campaign and this node’s authoritative requirements, explain blockers and supported options. Do not generate a duplicate ambition or development. This is discussion only: do not issue orders, spend resources, accept a proposal, commission work, or advance time.` }] });
+    if (result.isError) throw new ToolFailure('The host declined the steward discussion. No discussion was confirmed.');
+  }
   async ask(ambition: string, revision: number, selection: Selection | null) {
     if (!this.embedded) throw new ToolFailure('No AI runs in local preview. Copy this ambition to your connected ChatGPT conversation, or import a validated proposal below.');
     await this.context(selection, revision);

@@ -1,0 +1,25 @@
+@import '@fontsource/crimson-text/700.css';
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/source-sans/SourceSans3-Regular.otf.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/source-sans/SourceSans3-Bold.otf.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans Symbols 2';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@fontsource/noto-sans-symbols-2/files/noto-sans-symbols-2-symbols-400-normal.woff2') format('woff2');
+}

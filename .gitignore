@@ -18,6 +18,7 @@ logs/
 # Build artifacts
 node_modules/
 dist/
+dist-design/
 build/
 .venv/
 __pycache__/

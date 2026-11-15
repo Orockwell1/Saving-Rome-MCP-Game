@@ -1,6 +1,6 @@
 # Motion design evaluation and implementation contract
 
-Status: Motion React is integrated in the local prototype. Generated naval/religious branches, 12/100/500-node local profiles, responsive long-content panels and live reduced-motion changes have been exercised. Windows, native popup keyboard acceptance and actual embedded-client checks remain open. Exact visual translation follows the [single-node/details contract gate](design-translation-layer.md); this evidence is not a Figma fidelity claim.
+Status: Motion React is integrated in the local prototype. The earlier baseline exercised generated naval/religious branches and 12/100/500-node local profiles. The subsequent node/details contract has separate [matching-viewport evidence](design-translation-layer.md) and desktop/mobile real-host checks for focus, camera retention and live reduced-motion changes; the large-tree performance profile was not repeated for that revision. Windows, native popup keyboard acceptance and actual embedded-client checks remain open.
 
 ## Decision
 

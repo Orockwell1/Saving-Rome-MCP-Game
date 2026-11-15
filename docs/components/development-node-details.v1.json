@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "id": "node-details.v1",
+  "revision": 1,
+  "approval": "verified-with-declared-differences",
+  "sourceBinding": "private-development-metadata-only",
+  "acceptedDifferences": ["existing-public-ship-glyph"],
+  "owners": {
+    "node": "ui/src/development/DevelopmentCard.tsx",
+    "details": "ui/src/development/DevelopmentInspector.tsx",
+    "presentation": "ui/src/development/presentation.ts",
+    "tokens": "ui/src/development/tokens.css",
+    "integration": ["ui/src/Development.tsx", "ui/src/Details.tsx", "ui/src/App.tsx", "ui/src/bridge.ts"]
+  },
+  "variants": {
+    "nodeState": ["proposed", "available", "blocked", "underway", "completed"],
+    "interaction": ["default", "hover", "selected", "focus"],
+    "detailsPhase": ["proposal", "authorized", "commissioned", "complete"],
+    "operationalExtensions": ["busy", "error", "empty", "planned", "disconnected", "live-progress", "long-content"]
+  },
+  "tokens": {
+    "background": "#0e1414", "surface": "#151c1e", "raised": "#1c2526", "hover": "#233031", "selected": "#28271d",
+    "ink": "#f0ece0", "muted": "#b8beba", "accent": "#e9cb8e", "border": "#566264", "softBorder": "#344042", "selectedBorder": "#bea16a", "focus": "#a8deea",
+    "blocked": "#e4b192", "proposed": "#c6bbdd", "available": "#f0d39a", "underway": "#a9cad8", "completed": "#c6d79c",
+    "radius": 2, "spacing": [4, 8, 12, 16], "borderWidths": [1, 2],
+    "label": {"family": "Source Sans 3", "weight": 700, "size": 12, "lineHeight": 16, "letterSpacing": 0.65},
+    "small": {"family": "Source Sans 3", "weight": 400, "size": 13, "lineHeight": 17},
+    "body": {"family": "Source Sans 3", "weight": 400, "size": 15, "lineHeight": 21},
+    "cardTitle": {"family": "Crimson Text", "weight": 700, "size": 19, "lineHeight": 21},
+    "detailsTitle": {"family": "Crimson Text", "weight": 700, "size": 32, "lineHeight": 34}
+  },
+  "regions": [
+    {"id": "node", "required": true, "referenceBox": [0, 0, 210, 137]},
+    {"id": "node.icon", "required": true, "referenceBox": [14, 14, 30, 30]},
+    {"id": "node.category", "required": true},
+    {"id": "node.selection", "required": false},
+    {"id": "node.title", "required": true, "referenceBox": [14, 52, 182, 21]},
+    {"id": "node.description", "required": true, "referenceBox": [14, 81, 182, 17]},
+    {"id": "node.status", "required": true},
+    {"id": "node.requirements", "required": true},
+    {"id": "node.progress", "required": false},
+    {"id": "details", "required": true, "referenceBox": [0, 0, 324, 479]},
+    {"id": "details.phase", "required": true},
+    {"id": "details.title", "required": true, "referenceBox": [17, 45, 290, 34]},
+    {"id": "details.description", "required": true, "referenceBox": [17, 91, 290, 21]},
+    {"id": "details.requirements", "required": true, "referenceBox": [17, 124, 292, 91]},
+    {"id": "details.budget", "required": true},
+    {"id": "details.impact", "required": true},
+    {"id": "details.reason", "required": true, "referenceBox": [17, 325, 292, 52]},
+    {"id": "details.action", "required": true, "referenceBox": [17, 389, 292, 44]},
+    {"id": "details.receipt", "required": true, "referenceBox": [17, 445, 290, 17]},
+    {"id": "details.progress", "required": false},
+    {"id": "details.error", "required": false}
+  ],
+  "viewports": [
+    {"id": "expanded", "width": 1488, "height": 784, "dpr": 1, "nodeOrigin": [584, 427], "detailsOrigin": [1137, 185]},
+    {"id": "compact", "width": 396, "height": 784, "dpr": 1, "detailsOrigin": [36, 153]},
+    {"id": "mobile-safety", "width": 390, "height": 844, "dpr": 1, "detailsOrigin": [33, 153]}
+  ],
+  "flows": ["select-inspect", "compact-back", "commission-acknowledgement", "commission-error", "disconnected-steward", "long-content", "private-reference-import"],
+  "behavior": {
+    "fieldSemantics": "Costs, time, prerequisites, progress and phase derive from authoritative state. Direct prerequisite counts and broader explanatory facts are distinct. Source example campaign values are not production defaults.",
+    "permissions": "Single-player, authenticated campaign. Disabled, disconnected, uncertain, proposed, blocked, planned and completed states cannot commission. The engine revalidates every order.",
+    "transitions": "Selection never commissions. Pending orders retain the acknowledged phase; only an accepted snapshot produces Commissioned or Complete. Authorized may offer a separate neutral discussion action.",
+    "navigation": "Compact node selection opens a detail focus view after acknowledgement. Back or Escape restores the retained graph and invoking control. Passive updates do not reopen the view.",
+    "keyboard": "A real button selects each card with Enter or Space. Focus and selection remain distinct. Pending or unavailable transport uses aria-disabled without dropping card focus. Unscaled cards and action controls have at least a 44px target; zoomed graph overviews retain an unscaled keyboard selector.",
+    "errors": "Expose transport/rejection errors without an optimistic success receipt. Local preview explicitly disables steward messaging instead of pretending an AI response exists.",
+    "scrolling": "Keep the same centered inspector in a scrollable compact sheet. Long titles and descriptions remain available in full; graph text may be bounded. No document horizontal overflow at 390px.",
+    "motion": "System and explicit reduced-motion preferences apply; no animation gates a command. Keep graph position, focus and selection stable during progress updates.",
+    "noWrite": "The hermetic lab imports only presentation components. It has no campaign transport, credentials, storage, network writes or Figma writes. Reference content is chosen locally and is never uploaded.",
+    "privacy": "Source IDs, versions, raw metadata, original reference content, images, comparisons and bindings remain outside Git. The existing public ship glyph is an explicit user-selected difference."
+  }
+}

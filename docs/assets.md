@@ -25,9 +25,19 @@ The eleven political/context regions are original illustrative sketches clipped 
 
 ## Fonts and dependency notices
 
-The current UI uses local/system font stacks; no font files were imported. Exact design typography is pending private-source inspection.
+The node/details contract uses self-hosted fonts; other existing workspace surfaces retain their current stacks.
 
-`THIRD_PARTY_NOTICES.txt` preserves installed production npm licenses/notices and is embedded in the single-file widget. Regenerate with `uv run python scripts/collect_notices.py` after dependency changes. MapLibre retains its BSD-3-Clause and bundled notices; React, React Flow and Motion retain their upstream licenses. MCP packages contain an Apache-2.0/MIT licensing-transition notice; do not replace that actual notice with a simplified registry label. Python dependency notices remain in their installed distributions.
+| Family | Source | License |
+| --- | --- | --- |
+| Source Sans 3, regular/bold | Unmodified WOFF2 binaries from Adobe's [3.052R release](https://github.com/adobe-fonts/source-sans/releases/tag/3.052R), under `ui/src/assets/fonts/source-sans/` | SIL OFL 1.1; adjacent `LICENSE.md` |
+| Crimson Text, bold | `@fontsource/crimson-text` 5.3.0 | SIL OFL 1.1 |
+| Noto Sans Symbols 2 | `@fontsource/noto-sans-symbols-2` 5.3.0; symbols WOFF2 only | SIL OFL 1.1 |
+
+Full Source Sans coverage preserves the prerequisite checkmark. The explicit symbol fallback avoids platform-dependent phase/impact glyphs. Font licenses are not replaced by MIT.
+
+Vendored SHA-256: regular `63de0da0cc05298e2e9c6e5cef506d8454ca665f6e668a99d94f51174b9256ed`; bold `12954097ebbad6749ee1c81a143d555c263420115892211529fe6f51794b8439`. The source release archive hash is `d7f6724027fe5ca0bab44d6121284f1fa8f66dec5f2864aa969aed347041ac95`.
+
+`THIRD_PARTY_NOTICES.txt` preserves production npm and vendored-font licenses/notices and is embedded in the single-file widget. Regenerate with `uv run python scripts/collect_notices.py` after dependency changes. MapLibre retains its BSD-3-Clause and bundled notices; React, React Flow and Motion retain their upstream licenses. MCP packages contain an Apache-2.0/MIT licensing-transition notice; do not replace that actual notice with a simplified registry label. Python dependency notices remain in their installed distributions.
 
 ## Historical assumptions
 

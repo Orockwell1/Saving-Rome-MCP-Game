@@ -4,7 +4,7 @@
 
 A local-first, single-player strategy prototype beginning in AD 210. A Python simulation and SQLite save govern both MCP steward commands and a React campaign workspace.
 
-**Status:** runnable local prototype; actual ChatGPT embedding and exact Figma component fidelity are not verified. The current priority is the [contract-based node/details design slice](docs/design-translation-layer.md), blocked on private source access. Browser preview is not ChatGPT acceptance.
+**Status:** runnable local prototype. The [contract-based node/details slice](docs/design-translation-layer.md) is implemented and compared against authenticated private references at desktop and compact sizes, with declared glyph and text-edge differences. Actual ChatGPT embedding remains unverified; browser preview is not ChatGPT acceptance.
 
 ## Run locally
 
@@ -38,13 +38,13 @@ The embedded resource is built into one HTML file. `--stdio` serves the same eng
 - An offline Mediterranean–southern China atlas with coastlines, relief, rivers, selectable ports/fleets and explicit approximate historical regions. No Americas.
 - Generated, validated development definitions using shared engine rules—not just the authored naval tutorial. Costs, prerequisites, local manufacturing capacity, institutions and policy decisions have executable consequences.
 - Optional naval/citrus tutorial, scoped treasury mandates, expeditions, fruit spoilage, living plants, Egyptian overland cargo transfer and cultivation. Ships cannot cross a fictional Suez Canal.
-- Shared node/details rendering, visible unsupported-icon fallbacks, provenance, keyboard selection and reduced-motion controls. This UI still needs the requested exact-design translation.
+- Source-bound reusable node/details components for generated and authored trees, native keyboard selection, a compact focus view, reduced-motion controls, visible unsupported-icon fallbacks, and a separate read-only component lab.
 
 ## Explicit limits
 
 Generated content composes the implemented rule catalog; it cannot invent executable mechanics, arbitrary effects, code or external asset URLs. The local preview does not run an AI steward. Full warfare, territorial editing, belief conversion, comprehensive politics, detailed economic maintenance and historically reconstructed borders are not implemented. Travel times, resources and sweet citrus in AD 210 are declared gameplay assumptions.
 
-The private Figma frames have not been inspected. Approved PNG artwork is not proof of matching component tokens, geometry or variants. Live ChatGPT UI/CSP compatibility and a Windows/PC acceptance pass remain outstanding.
+Only the node/details pair has completed the private-source comparison workflow; the map and wider workspace are not exact-design sign-offs. The newly supplied private ship vector remains excluded. Live ChatGPT UI/CSP compatibility and a Windows/PC acceptance pass remain outstanding.
 
 ## Development and provenance
 

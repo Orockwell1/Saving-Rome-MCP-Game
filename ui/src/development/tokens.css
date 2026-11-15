@@ -1,0 +1,26 @@
+.development-node,
+.development-inspector {
+  --development-surface: #151c1e;
+  --development-raised: #1c2526;
+  --development-hover: #233031;
+  --development-selected: #28271d;
+  --development-border: #566264;
+  --development-border-soft: #344042;
+  --development-gold: #bea16a;
+  --development-focus: #a8deea;
+  --development-ink: #f0ece0;
+  --development-muted: #b8beba;
+  --development-accent: #e9cb8e;
+  --development-proposed: #c6bbdd;
+  --development-available: #f0d39a;
+  --development-blocked: #e4b192;
+  --development-underway: #a9cad8;
+  --development-completed: #c6d79c;
+  --development-font-body: 'Source Sans 3', 'Noto Sans Symbols 2', sans-serif;
+  --development-font-title: 'Crimson Text', serif;
+  --development-radius: 2px;
+  --development-space-xs: 4px;
+  --development-space-sm: 8px;
+  --development-space-md: 12px;
+  --development-space-lg: 16px;
+}

@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: #f0ece0; background: #0e1414; font-family: 'Source Sans 3', sans-serif; }
+.lab-controls { padding: 16px; max-width: 1488px; margin: auto; }
+.lab-controls h1 { margin: 0 0 8px; font-size: 24px; }
+.lab-controls p { margin: 8px 0; }
+.lab-control-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.lab-control-row label { display: grid; gap: 4px; flex: 1; min-width: 190px; max-width: 100%; }
+.lab-controls button, .lab-controls select, .lab-controls input, .lab-back { min-height: 44px; max-width: 100%; color: #f0ece0; background: #1c2526; border: 1px solid #566264; border-radius: 2px; font: inherit; }
+.lab-controls button, .lab-controls select { padding: 8px 12px; }
+.lab-controls input { width: 100%; }
+.lab-controls button:disabled { opacity: .5; }
+.lab-controls pre { max-height: 260px; overflow: auto; font-size: 12px; }
+.lab-stage { position: relative; width: 1488px; height: 784px; background: #0e1414; overflow: hidden; }
+.lab-frame-header { position: absolute; inset: 0 0 auto; height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 24px; background: #151c1e; border-bottom: 1px solid #344042; }
+.lab-frame-header strong { font: 700 19px/21px 'Crimson Text', serif; color: #e9cb8e; }
+.lab-frame-header span { border-left: 1px solid #566264; padding-left: 14px; font-size: 15px; line-height: 21px; }
+.lab-node { position: absolute; left: 584px; top: 427px; }
+.lab-sheet { position: absolute; left: 1137px; top: 185px; width: 324px; bottom: 24px; overflow: auto; background: #151c1e; }
+.lab-back { display: none; }
+.lab-ambition { position: absolute; top: 125px; left: 24px; margin: 0; color: #b8beba; font-size: 15px; line-height: 21px; }
+.lab-empty { position: absolute; top: 180px; left: 24px; right: 24px; }
+@media (max-width: 760px) {
+  .lab-stage { width: 100%; height: 100svh; }
+  .lab-frame-header { padding: 0 16px; }
+  .lab-back { position: absolute; display: block; left: 16px; top: 68px; width: 141px; height: 44px; padding: 11px; text-align: left; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: .65px; }
+  .lab-stage:not(.has-selection) .lab-back { display: none; }
+  .lab-ambition { left: 16px; right: 16px; }
+  .lab-node { top: 153px; left: 16px; }
+  .lab-stage.has-selection .lab-node { display: none; }
+  .lab-sheet { left: 16px; right: 16px; top: 153px; bottom: 13px; width: auto; }
+  .lab-sheet > .development-inspector { margin-inline: auto; }
+}

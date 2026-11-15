@@ -36,7 +36,7 @@ Unsupported visual recipes produce a labeled generic icon and retain the request
 
 ## Development design boundary
 
-The [design translation workflow](design-translation-layer.md) separates public component contracts from exact private Figma bindings, raw metadata and comparison captures. The current UI is a functional baseline. Exact node/details translation is gated on source inspection and matching-viewport evidence, not on an asset export or build succeeding.
+The [design translation workflow](design-translation-layer.md) separates public component contracts from exact private Figma bindings, raw metadata and comparison captures. The first node/details contract now has source inspection, matching-viewport evidence, a hermetic presentation lab and real-campaign regressions. Shared pure components accept presentation models; the campaign adapter derives costs, prerequisites, progress and actions from acknowledged state. The lab never imports campaign transport. A passing component comparison is not a full-workspace or embedded-client sign-off.
 
 ## Connectivity boundary
 
