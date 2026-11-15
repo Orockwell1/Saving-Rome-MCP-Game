@@ -1,17 +1,16 @@
 # Figma handoff
 
-Player-provided source: [Rome Game — Tech Tree Icons, node 9:1006](https://www.figma.com/design/oDlwJeCthWHYbSGXVfLVPa/Rome-Game-%E2%80%94-Tech-Tree-Icons?node-id=9-1006).
+Design source: private creator-owned workspace. Its URL and file key are deliberately excluded from this repository. Runtime players and assistants need no Figma access.
 
-Status: link recorded; file contents have not yet been inspected or exported. This link does not imply public access or permission to redistribute third-party assets.
+The implementation uses eleven existing creator-supplied naval PNG exports, approved by the creator for MIT publication. The creator describes them as ChatGPT-generated artwork inspired by another design. Inspiration and originality were not independently verified. Export hashes, dimensions and provenance are in `ui/src/assets/naval/manifest.json`.
 
-## Prepare for implementation
+Direct source-file inspection remains unverified: the available Figma session was signed out, and Brave denied Apple Events page access. No claim is made that the code reproduces uninspected source typography or component states.
 
-- Inventory actual icons/components and map them to stable naval capability IDs.
-- Record colors, type, spacing, icon sizing, selected/hover/disabled states.
-- Include available, blocked, in-progress, completed, and planned node states.
-- Export appropriate SVGs with accessible text labels; preserve source provenance.
-- Confirm fonts, images, and icons can be redistributed before committing exports.
-- Compose a representative tree, selected-tech details panel, and map selection panel. Validate inside the real embedded viewport before expanding the library.
+## Contract-based first slice
+
+Follow [Rome's design translation workflow](design-translation-layer.md). The immediate target is one exact development-tree node and its details panel, with private source bindings, public reusable contracts, named tokens/variants, explicit behavior and matching-viewport evidence.
+
+The current UI is a functional baseline using the approved artwork, not a verified reproduction of the private components. Do not expand the component family or claim fidelity until the first slice's documented differences are resolved. Missing source states must remain explicit design decisions.
 
 Visual target: readable historical atlas, muted political colors, deep blue seas, restrained animation; no map terrain or provinces need to be hand-drawn in Figma.
 

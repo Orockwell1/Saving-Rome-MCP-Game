@@ -1,10 +1,10 @@
 # Motion design evaluation and implementation contract
 
-Status: documentation evaluation completed; runtime integration and performance remain untested because this repository has no application yet. No packages, agent plugins, external MCP servers, or paid services have been installed.
+Status: Motion React is integrated in the local prototype. A generated naval branch and religious reform branch were exercised with retained tree viewport and selection; the full 12/100/500 performance, responsive, system-preference and actual embedded-client checks below remain outstanding. Exact visual translation now follows the [single-node/details contract gate](design-translation-layer.md).
 
 ## Decision
 
-Use the free MIT-licensed Motion React library as the candidate single animation library. Use native CSS for simple hover/focus/color transitions. Treat Motion AI Kit as optional development assistance, not a game dependency. Its hosted documentation/spring tooling is distinct from Motion+ audits and premium examples; those paid features are unnecessary.
+Use the free MIT-licensed Motion React library as the single animation library. Use native CSS for simple hover/focus/color transitions. Motion AI Kit is not a game dependency; no hosted agent tooling, Motion+ audit or premium example is required.
 
 Use LottieFiles motion-design guidance as a reference for purposeful timing, easing, and bounded sequencing. It does not require adopting the Lottie animation player. Do not import its entire stylistic prescription: Rome needs readable, quiet motion, without continuous ambient effects, bouncing cards, shaking errors, or particle celebrations.
 

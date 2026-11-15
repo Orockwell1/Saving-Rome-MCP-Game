@@ -1,32 +1,36 @@
-# Build preparation and roadmap
+# Milestones and remaining acceptance
 
-## Before broad implementation
+## M0 — Protocol proof; ChatGPT acceptance blocked
 
-- [ ] Verify current official ChatGPT account/workspace requirements, MCP writes, embedded UI, and local HTTPS connection options.
-- [ ] Review the linked Figma node; record component states, colors, typography, icon exports, and rights before importing assets.
-- [ ] Compare an official embedded-app example against the Python backend preference. Pick and pin compatible versions only after a working spike.
-- [ ] Choose a small map dataset and record provenance. Modern boundaries are not ancient borders.
-- [ ] Define stable IDs and minimal schemas for campaign, ports, fleet, routes, projects, prerequisites, commands, dispatches, and standing orders.
-- [ ] Specify pause/speed/fast-forward defaults and safe retry/stale-state behavior.
+The official MCP client negotiated protocol `2025-11-25` with Python MCP SDK `2.3.0` over the running HTTP host. Six tools were discovered; inspect, route preview, movement commitment, command replay and shared state worked. The production HTML resource was read through the official SDK. Unauthorized local API requests returned 401.
 
-## M0 — ChatGPT connection proof
+**Not verified:** authenticated ChatGPT installation, actual iframe rendering/CSP, chat-to-map round trip, or a PC/Windows client. The available ChatGPT session was signed out; tunnel credentials were absent. A browser preview does not close this milestone.
 
-One fleet, two ports, an embedded selectable map, inspect/preview/issue movement tools, and a shared command layer. Verify on PC and Mac. The local host must remain reachable. Authenticate the endpoint; verify current requirements rather than assuming localhost is directly reachable.
+## M1 — Persistent simulation, locally exercised
 
-Acceptance: select fleet, issue a chat order, see the accepted route in the map. Record tested client, versions, and limitations.
+SQLite transactions, ownership lock, clock leases, current-position rerouting, event ordering, idempotency and conflicting orders are implemented. Engine tests cover restarts, backups, same-revision competition, no double spending, lease expiry, decision stops and cargo/resource invariants.
 
-## M1 — Persistent movement
+Actual host restart preserved a generated campaign's day, trees, projects, fleets, resources, selection and history. Browser interaction exposed and fixed a clock/revision race: ticks and heartbeat renewals no longer invalidate a Pause order, while competing orders still conflict. Live resume/pause and midroute orders were exercised again after the fix.
 
-SQLite save, campaign clock, travel progress, rerouting from current position, event log, idempotent commands and stale-state checks. Restart and resume in a fresh chat. Test meaningful movement invariants and persistence rather than UI implementation details.
+## M2 — Corridor atlas and generated development
 
-## M2 — Map corridor and naval tree
+The schematic map was replaced with offline 1:50m geography, coast-clipped contextual regions, relief, rivers, labeled ports and fleet banners. Mediterranean and Asia-corridor views, uncommitted route previews and changed ETAs were visually exercised in Chromium on a Mac.
 
-Mediterranean–Egypt/Red Sea–India/Sri Lanka–Southeast Asia–southern China, with selected ports detailed and other territory coarse. Model Egyptian transfers coherently. Add roughly 8–12 naval nodes, resource bottlenecks, a shipyard project, and a trial vessel. Map and tree selection provide steward context.
+A separately authored twelve-node naval proposal was accepted, completed under a scoped mandate, and produced local manufacturing capacity, a trial vessel and a three-ship advanced squadron. A religious civic-reform proposal was imported through the UI; its consultation completed with a prerequisite referencing the naval branch. The SDK integration test separately exercises novel naval/religious proposals, policy choices, forged-definition rejection and persistence without a model API.
 
-## M3 — Optional tutorial
+**Priority gate:** inspect and translate one exact private Figma node/details pair using [public contracts and private evidence](design-translation-layer.md). The current component UI is not a Figma fidelity claim. Do not expand the family before documented differences are resolved.
 
-Citrus expedition, accelerated but accounted-for naval development, scoped standing order, fast-forward that stops for consequential decisions, and a small advanced sailing fleet. Label AD 210 sweet-citrus availability as an assumption. Skipping the tutorial leaves Roman-era capabilities.
+## M3 — Optional tutorial and executable logistics
 
-## Deferred
+The authored eleven-node naval tutorial is optional. Skipping grants no advanced capabilities. Engine tests cover paid local manufacture, capacity/knowledge distinction, Asian contact using Roman vessels, outbound/return voyages, spoilage, living plants, Egyptian land transfer and cultivation.
 
-Full warfare, territorial editing, extensive politics, complete historical boundaries, enormous tech tree, mobile certification, and paid hosting. Do not require multiplayer, blockchain, or a paid model API.
+Institution and law primitives produce explicit political choices rather than silently resolving major policy through a standing order. Wider belief conversion, warfare and detailed economic maintenance are outside the implemented rules.
+
+## Outstanding release evidence
+
+- Exact private-source component mapping, design-token/variant review and matching-viewport node/details comparison.
+- Full 12/100/500-node browser performance exercise, responsive and system/in-game reduced-motion acceptance.
+- Fresh-checkout installation proof and final candidate publication.
+- Actual ChatGPT installation, embedded interaction and PC/Mac access to the same host.
+
+Current local evidence is not a claim of release completion or unbounded tree performance. See [asset provenance](assets.md) and [architecture](architecture.md) for explicit historical, data and transport limitations.

@@ -2,33 +2,52 @@
 
 **If you could go back in time, how would you save the Roman Empire?**
 
-An open-source, single-player grand strategy game being designed for play inside ChatGPT through MCP. Start in AD 210 as a time traveler named as Severus’s heir. Discuss policy with an imperial steward, give orders on an interactive campaign map, and explore a visible technology tree.
+A local-first, single-player strategy prototype beginning in AD 210. A Python simulation and SQLite save govern both MCP steward commands and a React campaign workspace.
 
-**Status: planning and technical discovery. No playable release or verified ChatGPT integration yet.**
+**Status:** runnable local prototype; actual ChatGPT embedding and exact Figma component fidelity are not verified. The current priority is the [contract-based node/details design slice](docs/design-translation-layer.md), blocked on private source access. Browser preview is not ChatGPT acceptance.
 
-## The direction
+## Run locally
 
-- Save Rome through your own approach: institutions, health, agriculture, diplomacy, military reform, technology, or exploration.
-- One authoritative simulation for map actions and steward commands.
-- Local hosting, persistent campaigns, and access from PC and Mac through the same running host.
-- An optional citrus-expedition tutorial develops an advanced sailing fleet; initial geography connects the Mediterranean to southern China.
-- Europe, Africa, and Asia only. **The Americas are excluded.**
+Requires Python 3.11+, [uv](https://docs.astral.sh/uv/), and Node 24/npm.
 
-Preferred stack: Python simulation, SQLite persistence, TypeScript/React interface. Validate integration before locking dependencies.
+```sh
+uv sync --frozen
+npm ci
+npm run build
+uv run python -m rome
+```
 
-## Start here
+Open `http://127.0.0.1:8787`. In another terminal, `uv run python -m rome --print-token` prints the local preview token; paste it into the workspace. Keep it private. The host binds only to loopback and checks bearer authorization and request origins.
+
+The default campaign is `saves/campaign.db`. Restart with the same `--db` path to resume; the clock restarts paused without offline catch-up. Stop the owning host before using `--backup /private/path/backup.db`. A second host cannot own the same campaign clock.
+
+```sh
+uv run pytest tests/test_engine.py tests/test_server.py tests/test_generated_mcp.py -q
+```
+
+The embedded resource is built into one HTML file. `--stdio` serves the same engine through MCP while keeping the local preview available. Connecting ChatGPT additionally requires authenticated client/tunnel setup; localhost alone is not reachable from ChatGPT. No model API or Figma access is required to run the simulation.
+
+## Implemented locally
+
+- Persistent commands, receipts, previews, current-position rerouting and causal dispatches.
+- Pause, 1×/5×/20× time, bounded active-session leases and event/project fast-forward.
+- An offline Mediterranean–southern China atlas with coastlines, relief, rivers, selectable ports/fleets and explicit approximate historical regions. No Americas.
+- Generated, validated development definitions using shared engine rules—not just the authored naval tutorial. Costs, prerequisites, local manufacturing capacity, institutions and policy decisions have executable consequences.
+- Optional naval/citrus tutorial, scoped treasury mandates, expeditions, fruit spoilage, living plants, Egyptian overland cargo transfer and cultivation. Ships cannot cross a fictional Suez Canal.
+- Shared node/details rendering, visible unsupported-icon fallbacks, provenance, keyboard selection and reduced-motion controls. This UI still needs the requested exact-design translation.
+
+## Explicit limits
+
+Generated content composes the implemented rule catalog; it cannot invent executable mechanics, arbitrary effects, code or external asset URLs. The local preview does not run an AI steward. Full warfare, territorial editing, belief conversion, comprehensive politics, detailed economic maintenance and historically reconstructed borders are not implemented. Travel times, resources and sweet citrus in AD 210 are declared gameplay assumptions.
+
+The private Figma frames have not been inspected. Approved PNG artwork is not proof of matching component tokens, geometry or variants. Live ChatGPT UI/CSP compatibility and a Windows/PC acceptance pass remain outstanding.
+
+## Development and provenance
 
 - [First-pass brief](docs/first-pass-brief.md)
-- [Build preparation and roadmap](docs/roadmap.md)
-- [Architecture decisions](docs/architecture.md)
-- [Reusable projects and data](docs/references.md)
-- [Figma design handoff](docs/design.md)
+- [Architecture](docs/architecture.md) · [Milestones](docs/roadmap.md)
+- [Design translation](docs/design-translation-layer.md) · [Motion contract](docs/motion-design.md)
+- [Asset provenance](docs/assets.md) · [Third-party notices](THIRD_PARTY_NOTICES.txt)
 - [Contributing](CONTRIBUTING.md)
 
-There is no install or run command yet. The first milestone is one fleet moving through an embedded ChatGPT map, with rules and a persistent save behind it.
-
-## Open source and privacy
-
-Project-owned code and documentation are MIT licensed. Third-party code, maps, fonts, and art retain their own terms; see [asset provenance](docs/assets.md). Campaign saves, credentials, and local settings must not be committed. Public source does not require public campaign data.
-
-See [motion design evaluation](docs/motion-design.md) for shared timing tokens, generated-tree behavior, accessibility, and implementation checks.
+Project-owned code/documentation and approved naval exports use MIT. Dependencies retain their own licenses. After changing npm dependencies, regenerate bundled notices with `uv run python scripts/collect_notices.py`. Never commit saves, credentials, private source links/IDs, raw design metadata or reference screenshots.

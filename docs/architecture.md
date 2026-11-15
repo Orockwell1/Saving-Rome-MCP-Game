@@ -1,26 +1,45 @@
-# Architecture — provisional
+# Architecture
 
-## Agreed constraints
+## Authority and interfaces
 
-ChatGPT-first embedded map and technology tree; local-first hosting; one private persistent campaign; no Americas. Model narration never overrides engine facts.
+`rome/engine.py` owns campaign facts. `rome/models.py` validates strict data-only commands and generated proposals; `rome/rules.py` owns costs, durations, requirements and effects. `rome/world.py` supplies the deliberately limited historical scenario. Model narration cannot award resources, complete work, replace accepted definitions, or add executable rules.
 
-## Preferred components
+`rome/server.py` uses the official Python MCP SDK. Six tools expose inspection, workspace rendering, previews, orders, proposals and the public catalog. Local `/api/tool` requests call the same registered MCP tools; there is no alternate browser simulation. `ui/src/bridge.ts` uses the MCP Apps SDK when embedded and bearer-authenticated HTTP in local preview.
 
-- Python: simulation and authoritative command validation.
-- SQLite: transactional save, commands, events, projects, orders, and campaign clock.
-- TypeScript/React: embedded map, panels, and naval technology tree.
-- MCP adapter: current official SDK and embedded-app protocol; choose Python-only or a thin TypeScript adapter after the integration proof.
+The production React/MapLibre/React Flow/Motion workspace is a single `dist/index.html`, including geographic data, approved icons, the MapLibre worker and dependency notices. There are no map-tile, glyph, image-generation or font-CDN runtime requests. Actual ChatGPT iframe/CSP behavior still requires verification.
 
-Keep engine logic independent of HTTP, MCP, and rendering. Both UI actions and chat commands use the same command API. Persist command identifiers for retries and use campaign revisions/revalidation for stale requests. Preview is not a reservation; committing must check again.
+## Transactions and saves
 
-## Clock
+SQLite WAL transactions persist campaign state and successful command receipts. Each command has a stable ID and an observed revision. Replaying the same ID/payload returns the saved result without spending again; changing a used ID's payload is rejected.
 
-Advance independently while playing. Support pause, speed, and event-based fast-forward. Use explicit elapsed-time bookkeeping and saved events; define inactivity behavior. Do not assume a chat model runs continuously or can be invoked by the service without an API. Background actions use game rules and mandates.
+Snapshots have a monotonically increasing `revision`. `last_order_revision` records the last competing player/steward order. Clock frames and lease heartbeats do not invalidate an otherwise current observed order; actual orders do. Every accepted command revalidates present resources, prerequisites, capacity, cargo and targets in its transaction. Previews reserve nothing.
 
-## Local connectivity
+The UI serializes commands, accepts only non-older snapshots, and preserves an uncertain command's exact envelope for explicit retry. It never presents an unacknowledged order as complete.
 
-A local host runs the campaign; another device accesses that same host. Verify a supported authenticated HTTPS connection/tunnel for ChatGPT. No credentials or saves in Git. A development browser preview is helpful but is not proof of embedded ChatGPT functionality.
+A filesystem-local SQLite ownership lock permits one CLI host clock per campaign. Restart preserves definitions, routes, progress, selection and history, then pauses without offline catch-up. Use the backup command with the host stopped. Saves and credentials remain outside source control. Receipt/history pruning is not implemented.
 
-## Open decisions
+## Campaign time and travel
 
-Current ChatGPT eligibility/auth flow; exact SDK versions; map renderer choice following embedded WebGL tests; initial route dataset; time speeds; precise naval design; asset export and licensing. Record decisions with evidence as spikes complete.
+The host advances from monotonic elapsed seconds at 1, 5 or 20 campaign days per real second. Playing requires a heartbeat lease of at most 120 seconds; the visible workspace renews it every 30 seconds. Pause does not require continued model activity. Hidden/closed UI stops renewals; expiry pauses the clock. No background model API is invoked.
+
+Fast-forward processes intervening events rather than skipping them. Institution/law decisions stop advancement for an explicit choice. Scoped mandates can commission routine accepted projects within their cumulative treasury ceiling, available materials and workforce; they cannot resolve consequential decisions.
+
+Fleet position derives from saved sea-link polylines and campaign timestamps. Rerouting begins at the interpolated position and compares remaining paths, not a snapped port. The Mediterranean and Red Sea are separate fleet networks. Egyptian land shipments transfer cargo, not vessels. Port locations, route times and frontiers are explicitly approximate.
+
+## Generated development
+
+A proposal contains stable IDs, named ambition, provenance, supported rule IDs, existing port IDs, prerequisites, affected people/scope and allowlisted icon recipes. It is bounded to 500 nodes per proposal. Validation rejects cycles, duplicate IDs, invented prerequisites, arbitrary fields/effects/code and replacement of existing definitions.
+
+Proposal, acceptance, resource commitment, scheduled work, decision and completed outcome are different states. Cross-tree prerequisites can reference campaign-specific completed work. Local knowledge does not substitute for shipyard facilities, supplies or trained crews.
+
+Unsupported visual recipes produce a labeled generic icon and retain the requested identifier. Unsupported mechanics fail validation; they are never decorative nodes implying nonexistent behavior. The public catalog exposes rule/schema and component/icon data without private design credentials.
+
+## Development design boundary
+
+The [design translation workflow](design-translation-layer.md) separates public component contracts from exact private Figma bindings, raw metadata and comparison captures. The current UI is a functional baseline. Exact node/details translation is gated on source inspection and matching-viewport evidence, not on an asset export or build succeeding.
+
+## Connectivity boundary
+
+The HTTP host binds to loopback, validates host/origin and requires its private token for tools. `--stdio` is for a trusted local MCP client or a private authenticated transport spawning the host. Do not expose the loopback service with an unauthenticated public reverse proxy.
+
+OpenAI's current [connection documentation](https://developers.openai.com/plugins/deploy/connect-chatgpt) and [Secure MCP Tunnel guide](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels) describe supported remote access. A tunnel requires appropriate ChatGPT/Platform access and credentials. Neither an authenticated tunnel nor actual ChatGPT embedding has been established in this implementation session.
