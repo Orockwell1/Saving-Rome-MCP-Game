@@ -4,6 +4,8 @@ This project has a runnable local prototype, not verified ChatGPT or exact-desig
 
 Keep simulation rules independent of MCP and UI. Use the shared command layer, persist authoritative facts, and check retry/stale-state behavior. Run the smallest relevant pytest path and `npm run build` for frontend changes. See the README for setup and the design translation guide for private-source capture boundaries.
 
+For browser regressions, first run `uv sync --frozen`, `npm ci`, `npx playwright install chromium` and `npm run build`, then `npm run test:ui`. The runner starts the real host with a random local token, an isolated database and an ephemeral port, and removes the fixture afterward. Desktop and 390 × 844 projects cover live system-motion changes and the in-game override without mocking campaign state.
+
 Include source/license information for imported material. Never commit credentials, local campaign databases, player logs, or private settings. Do not add playable Americas content. Keep documentation clear about working features versus plans.
 
 By submitting contributions, you agree to license your original contributions under the repository MIT license. Do not submit material you lack rights to redistribute.

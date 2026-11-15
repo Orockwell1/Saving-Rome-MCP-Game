@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react';
-import { MotionConfig, useReducedMotion } from 'motion/react';
+import { useCallback, useState, useSyncExternalStore } from 'react';
+import { MotionConfig } from 'motion/react';
 import { Atlas } from './Atlas';
 import { Development } from './Development';
 import { Council, Chronicle } from './Council';
@@ -10,6 +10,13 @@ import { campaign, useCampaign } from './campaign';
 import { number, type Position, type Selection } from './types';
 
 type Tab = 'atlas' | 'development' | 'council' | 'chronicle';
+const systemMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const readSystemMotion = () => systemMotion.matches;
+function subscribeSystemMotion(onChange: () => void) {
+  systemMotion.addEventListener('change', onChange);
+  return () => systemMotion.removeEventListener('change', onChange);
+}
+
 function TokenForm({ reconnect = false }: { reconnect?: boolean }) {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,8 +27,8 @@ export function App() {
   const view = useCampaign();
   const [tab, setTab] = useState<Tab>('atlas');
   const [reduce, setReduce] = useState(false);
-  const systemReduced = useReducedMotion();
-  const reduced = reduce || Boolean(systemReduced);
+  const systemReduced = useSyncExternalStore(subscribeSystemMotion, readSystemMotion);
+  const reduced = reduce || systemReduced;
   const [focus, setFocus] = useState<{ position: Position; serial: number } | null>(null);
   const disabled = view.busy || view.uncertain || !view.connected;
   const onSelect = useCallback((selection: Selection) => { if (!disabled) void campaign.command('select', selection); }, [disabled]);
@@ -29,7 +36,7 @@ export function App() {
   const state = view.state;
   if (!state) return <main className="connection-screen"><div className="connection-card"><span className="brand-mark">SPQR</span><p className="eyebrow">An empire. An unwritten future.</p><h1>Rome</h1><p className="connection-lead">You inherit an empire in AD 210.<br />What will you choose to save?</p>{bridge.embedded ? <><p role="status">{view.error ? 'The host connection needs attention.' : 'Connecting to the authoritative campaign through the MCP host…'}</p><button onClick={() => void campaign.inspect()}>Retry host connection</button></> : <><p className="preview-label">Local development preview · ChatGPT embedding unverified</p><TokenForm /></>}{view.error && <p className="inline-error" role="alert">{view.error}</p>}</div></main>;
   const decisions = state.decisions.filter(decision => !decision.resolved).length;
-  return <MotionConfig reducedMotion={reduce ? 'always' : 'user'}><div className={`app ${reduced ? 'reduced-motion' : ''}`}>
+  return <MotionConfig reducedMotion={reduced ? 'always' : 'never'}><div className={`app ${reduced ? 'reduced-motion' : ''}`}>
     <header className="masthead"><div className="brand"><span className="brand-mark">SPQR</span><div><h1>ROME</h1><span>Imperial workspace</span></div></div><div className="campaign-date"><span className="eyebrow">The reign begins with you</span><strong>AD {state.year}</strong><span>Campaign day {number(state.day)}</span></div><div className="connection-state"><span className={view.connected ? 'online-dot' : 'offline-dot'} />{view.connected ? 'Campaign connected' : 'Connection lost'}<small>Revision {state.revision}</small></div></header>
     {!bridge.embedded && <div className="preview-strip">Local development preview · ChatGPT embedding unverified · no AI runs here</div>}
     <section className="resource-bar" aria-label="Imperial resources">{Object.entries(state.resources).map(([key, value]) => <div key={key}><span>{key.replaceAll('_', ' ')}</span><strong>{number(value)}</strong></div>)}<details className="preferences"><summary>Preferences</summary><div className="preferences-body"><label className="check-label"><input type="checkbox" checked={reduce} onChange={event => setReduce(event.target.checked)} />Reduce motion</label><p>System reduced motion: {systemReduced ? 'on' : 'off'}. Map and graph camera movement follows this preference.</p>{!bridge.embedded && <TokenForm reconnect />}<p>Clock advances only with an active session lease. Closing or hiding this workspace stops heartbeats; the service pauses within 120 seconds. No offline catch-up.</p></div></details></section>

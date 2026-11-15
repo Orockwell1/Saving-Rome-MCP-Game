@@ -22,8 +22,12 @@ Open `http://127.0.0.1:8787`. In another terminal, `uv run python -m rome --prin
 The default campaign is `saves/campaign.db`. Restart with the same `--db` path to resume; the clock restarts paused without offline catch-up. Stop the owning host before using `--backup /private/path/backup.db`. A second host cannot own the same campaign clock.
 
 ```sh
-uv run pytest tests/test_engine.py tests/test_server.py tests/test_generated_mcp.py -q
+uv run pytest tests/test_engine.py tests/test_server.py tests/test_generated_mcp.py tests/test_design_capture.py -q
+npx playwright install chromium
+npm run test:ui
 ```
+
+Browser regressions use the production build and start isolated temporary campaigns, not your saved game. Rebuild after UI changes. Measured local performance and remaining input/client limitations are recorded in [motion acceptance](docs/motion-design.md#recorded-local-acceptance).
 
 The embedded resource is built into one HTML file. `--stdio` serves the same engine through MCP while keeping the local preview available. Connecting ChatGPT additionally requires authenticated client/tunnel setup; localhost alone is not reachable from ChatGPT. No model API or Figma access is required to run the simulation.
 

@@ -1,6 +1,6 @@
 # Motion design evaluation and implementation contract
 
-Status: Motion React is integrated in the local prototype. A generated naval branch and religious reform branch were exercised with retained tree viewport and selection; the full 12/100/500 performance, responsive, system-preference and actual embedded-client checks below remain outstanding. Exact visual translation now follows the [single-node/details contract gate](design-translation-layer.md).
+Status: Motion React is integrated in the local prototype. Generated naval/religious branches, 12/100/500-node local profiles, responsive long-content panels and live reduced-motion changes have been exercised. Windows, native popup keyboard acceptance and actual embedded-client checks remain open. Exact visual translation follows the [single-node/details contract gate](design-translation-layer.md); this evidence is not a Figma fidelity claim.
 
 ## Decision
 
@@ -37,7 +37,7 @@ Share the same named tokens with Figma and code. Durations are real UI time, ind
 
 ## Accessibility
 
-Configure Motion to respect the system preference (MotionConfig reducedMotion="user"). Also support an explicit in-game reduced-motion override. Custom map camera/graph animations need separate preference handling: MotionConfig does not control them.
+Subscribe to system preference changes with `useSyncExternalStore`, and combine that value with the explicit in-game reduced-motion override. Pass the resolved preference to MotionConfig and the custom map/graph cameras. MotionConfig does not control those cameras. The initial library preference hook did not update after an OS preference change in the observed browser; the application now uses the media-query change event.
 
 Reduced motion disables sliding, scaling, animated reflow, route drawing, and camera flight; use immediate changes or brief fades. Keep routes and unit positions accurate. Preserve keyboard access, text statuses, and focus indicators. Announce concise batch summaries rather than a screen-reader announcement per generated node. No gameplay information may depend on seeing an animation.
 
@@ -55,6 +55,23 @@ Validate in the actual ChatGPT embedded frame. Browser preview results alone do 
 4. Test system and in-game reduced-motion settings, keyboard navigation, focus retention, hidden/reopened views, and interrupted/repeated updates.
 5. Test live fleet positions against authoritative campaign time, including pause, speed changes, fast-forward, reroute, and reconnect.
 6. Verify production assets and dependencies are bundled compatibly with embedded-app resource restrictions. Preserve license notices for any reused code.
+
+## Recorded local acceptance
+
+The production UI was profiled on an Apple M5 Pro with 24 GiB RAM, macOS arm64, managed Chromium 150, a 1440 × 1000 viewport and DPR 1.25. Each observation sampled 120 animation frames while using graph zoom controls, with campaign time running and a details panel open. These short samples are not a sustained 60 Hz or Windows performance guarantee.
+
+| Campaign nodes | Median frame interval (ms) | p95 (ms) | Maximum (ms) | Long tasks | Visible node elements | JS heap (MiB) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 12 | 16.7 | 16.8 | 16.8 | 0 | 9 | 21.34 |
+| 100 | 16.7 | 16.7 | 16.8 | 0 | 12 | 24.34 |
+| 500 | 16.7 | 16.8 | 25.0 | 0 | 12 | 27.25 |
+
+- Real proposal/acceptance batches from 12 to 100 and 100 to 500 nodes preserved camera position, selection and search-input focus. Fixtures used the published research primitive, long titles/descriptions and live project progress, not invented effects.
+- At 500 nodes, pointer-drag panning and the native project selector worked. Switching to the atlas and back retained the selected project and panned camera.
+- Long selected-project content was visually inspected at 1440, 1100 and 390 CSS-pixel widths. Document horizontal overflow was zero; the mobile requirements action remained reachable. This does not approve the current typography or panel layout against the private design.
+- `npm run test:ui -- tests/ui/preferences.spec.ts` passed at 1440 × 1000 and 390 × 844 in Playwright Chromium 159. It uses the real host, an isolated temporary database and the production bundle. It changes the system preference after mount, tests the manual override after the system preference changes back, and measures actual map-marker positions across camera actions.
+- Native select-popup keyboard input remains unverified in the Mac headless environment: the same arrow/Enter sequence also left a plain HTML select unchanged outside Rome. Programmatic native selection and focus retention are not substitutes for that acceptance.
+- The current self-contained production HTML is 6,561.05 kB; Vite estimates 3,287.61 kB gzip. This includes approved artwork, offline geography and dependency notices. Actual ChatGPT resource loading/CSP remains unverified.
 
 ## Sources reviewed
 

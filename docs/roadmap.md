@@ -26,11 +26,17 @@ The authored eleven-node naval tutorial is optional. Skipping grants no advanced
 
 Institution and law primitives produce explicit political choices rather than silently resolving major policy through a standing order. Wider belief conversion, warfare and detailed economic maintenance are outside the implemented rules.
 
+## Local installation and UI acceptance
+
+A separate checkout of `667f8ae` installed successfully with `uv sync --frozen --python 3.11` and `npm ci`; its production build and official SDK resource/state test passed. The host was then exercised with real 12-, 100- and 500-node campaigns. Recorded frame/heap observations, responsive checks and remaining input limitations are in [motion acceptance](motion-design.md#recorded-local-acceptance).
+
+The subsequent live reduced-motion fix passed production compilation and the real-host Playwright journey at desktop and mobile widths. This is local browser evidence, not native-device or ChatGPT acceptance.
+
 ## Outstanding release evidence
 
 - Exact private-source component mapping, design-token/variant review and matching-viewport node/details comparison.
-- Full 12/100/500-node browser performance exercise, responsive and system/in-game reduced-motion acceptance.
-- Fresh-checkout installation proof and final candidate publication.
+- Windows performance and native select-popup keyboard acceptance. In the Mac headless diagnostic, the same arrow/Enter sequence also failed to change a plain HTML select outside Rome.
+- Release acceptance; the candidate must not be presented as fully implemented.
 - Actual ChatGPT installation, embedded interaction and PC/Mac access to the same host.
 
 Current local evidence is not a claim of release completion or unbounded tree performance. See [asset provenance](assets.md) and [architecture](architecture.md) for explicit historical, data and transport limitations.
